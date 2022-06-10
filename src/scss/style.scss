@@ -10,5 +10,10 @@
 @import 'global/_typography';
 
 // Components 
-@import 'components/_sidebar.scss'
+@import 'components/_sidebar';
+@import 'components/_data';
 
+.dashboard {
+    display: flex;
+    height: 100vh;
+}

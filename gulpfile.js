@@ -2,8 +2,8 @@
 const gulp = require('gulp');
 
 //Css
-const postcss = require('gulp-postcss');
 const sass = require('gulp-sass')(require('sass'));
+const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 
@@ -12,7 +12,6 @@ const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 
 //Other
-const tinypng = require('gulp-tinypng-compress');
 
 const fileinclude = require('gulp-file-include');
 const browserSync = require('browser-sync').create();
@@ -33,9 +32,9 @@ var plugins = [
 
 function minJs() {
     return gulp.src(['src/script/*.js'])
-    .pipe(uglify())
-    .pipe(concat('min.js'))
-    .pipe(gulp.dest('./prod/script'))
+    //.pipe(uglify())  - not use now
+    .pipe(concat('script.js'))
+    .pipe(gulp.dest('./script'))
     .pipe(browserSync.stream());
 }
 
@@ -46,19 +45,10 @@ function include() {
             prefix: '@@',
             basepath: '@file'
         }))
-        .pipe(gulp.dest('./prod'))
+        .pipe(gulp.dest('./'))
         .pipe(browserSync.stream());
 }
 
-
-
-
-function PostStyle() {
-    return gulp.src('./dest/css/*.css')
-        .pipe(postcss(plugins))
-        .pipe(gulp.dest('./prod/src/css'))
-        .pipe(browserSync.stream());
-}
 
 
 
@@ -66,21 +56,11 @@ function style() {
     return gulp.src('src/scss/style.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss(plugins))
-        .pipe(gulp.dest('./prod/src/css'))
+        .pipe(gulp.dest('./styles'))
         .pipe(browserSync.stream());
 }
 
 
-
-function minImg() {
-    return gulp.src('src/img/**/*.{png,jpg,jpeg}')
-        .pipe(tinypng({
-            key: '6DDcLV9wZXw3hbTLWl2n2Y16nhMjVxDw',
-            sigFile: 'images/.tinypng-sigs',
-            log: true
-        }))
-        .pipe(gulp.dest('./prod/img'));
-}
 
 
 
@@ -89,7 +69,7 @@ function minImg() {
 function watch() {
     browserSync.init({
         server: {
-            baseDir: "prod"
+            baseDir: "./"
         }
     });
     gulp.watch("src/scss/**/*.scss", style)
@@ -101,7 +81,7 @@ function watch() {
 
 
 
-function Dtask() {
+function main() {
     include()
     style()
     watch();
@@ -109,5 +89,4 @@ function Dtask() {
 }
 
 
-exports.minImg = minImg
-exports.default = Dtask
+exports.default = main

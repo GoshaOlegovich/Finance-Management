@@ -1,0 +1,60 @@
+.data {
+    width: 100%;
+    overflow: scroll;
+    &__nav {
+        display: flex;
+        gap: 48px;
+        padding: 30px 0 20px 0;
+        justify-content: center;
+        background-color: #F8F8F8 ;
+    }
+
+    &__link {
+        font-size: 1.6rem;
+        opacity: 70%;
+        color: black;
+        font-weight: 500;
+
+        &--active{
+            opacity: 100%;
+        }
+    }
+
+    &__link {
+    }
+
+    &__table {
+        background-color: #fff;
+        border-radius: 5px;
+        width: 1000px;
+        margin: 40px auto; 
+        padding: 20px 24.5px;
+        border-spacing: 0 20px;
+       
+        th, td {
+            padding: 7px 0;
+        }
+    }
+
+    &__table-row {  
+       background-color: #F1F1F1;
+
+       &--income {
+        background-color: #d8f6be;
+       }
+       &--expences {
+        background-color: #f7bebe;
+       }
+    }
+
+    &__table-title {
+        color: black;
+        font-size: 1.4rem;
+    }
+
+    &__table-data {
+        text-align: center;
+        color: black;
+        font-size: 1.2rem;
+    }
+}

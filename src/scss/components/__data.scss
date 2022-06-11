@@ -24,10 +24,11 @@
     }
 
     &__table {
-        background-color: #F8F8F8;
+        background-color: #fff;
+        border-radius: 5px;
         width: 1000px;
         margin: 40px auto; 
-        padding: 30px 24.5px 20px;
+        padding: 20px 24.5px;
         border-spacing: 0 20px;
        
         th, td {
@@ -39,16 +40,16 @@
        background-color: #F1F1F1;
 
        &--income {
-        background-color: #bbf589;
+        background-color: #d8f6be;
        }
        &--expences {
-        background-color: #f58989;
+        background-color: #f7bebe;
        }
     }
 
     &__table-title {
         color: black;
-        font-size: 1.2rem;
+        font-size: 1.4rem;
     }
 
     &__table-data {

@@ -1,0 +1,16 @@
+.new-active {
+    box-sizing: border-box;
+    line-height: 0;
+    position: absolute;
+    border: 1px solid black;
+    padding: 24px;
+    color: black;
+    font-size: 1.6rem;
+    bottom: 50px;
+    right: 50px;
+    &:hover {
+        color: white;
+        background-color: black;
+    }
+
+}

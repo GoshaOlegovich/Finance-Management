@@ -1,0 +1,16 @@
+.modal-form__new-transaction {
+    position: absolute;
+    z-index: 100;
+    background-color: black;
+    padding: 24px;
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    bottom: 40px;
+    
+    left: 50%;
+    right: 150px;
+    input {
+        color: black;
+    }
+}

@@ -7,6 +7,13 @@
 })
 
 <body>
+<form class="modal-form__new-transaction">
+    <label for="type">Type</label>
+    <input class='modal-form__type' type="text" id="type">
+    <label for="amount">Amount</label>
+    <input class='modal-form__amount' type="text" id="amount">
+    <input type="submit">
+</form>
 <section class="dashboard">
     <button class="new-active">+</button>
     <div class="sidebar">
@@ -16,23 +23,7 @@
         </nav>
 
         <ul class="sidebar__details">
-            <li class="sidebar__prop">
-                <h3 class="sidebar__prop-name">
-                    monobank
-                </h3>
-                <p class="sidebar__prop-amount">
-                    10.000 ₴
-                </p>
-            </li>
 
-            <li class="sidebar__prop">
-                <h3 class="sidebar__prop-name">
-                    swedenbank
-                </h3>
-                <p class="sidebar__prop-amount">
-                    10.000 $
-                </p>
-            </li>
         </ul>
 
         <div class="sidebar__user">
@@ -52,102 +43,12 @@
         </div>
         <table class="data__table">
             <tr class="data__table-row">
-                <th class="data__table-title">Reciever</th>
-                <th class="data__table-title">Category</th>
-                <th class="data__table-title">Date</th>
+                <!-- <th class="data__table-title">Index</th> -->
+                <th class="data__table-title">Type</th>
                 <th class="data__table-title">Amount</th>
             </tr>
-            <tr class="data__table-row data__table-row--income">
-                <td class="data__table-data">UPWORK</td>
-                <td class="data__table-data">Work</td>
-                <td class="data__table-data">9 June</td>
-                <td class="data__table-data">200$</td>
-            </tr>
-            <tr class="data__table-row data__table-row--income">
-                <td class="data__table-data">UPWORK</td>
-                <td class="data__table-data">Work</td>
-                <td class="data__table-data">9 June</td>
-                <td class="data__table-data">200$</td>
-            </tr>
-            <tr class="data__table-row data__table-row--income">
-                <td class="data__table-data">UPWORK</td>
-                <td class="data__table-data">Work</td>
-                <td class="data__table-data">9 June</td>
-                <td class="data__table-data">200$</td>
-            </tr>
-            <tr class="data__table-row data__table-row--income">
-                <td class="data__table-data">UPWORK</td>
-                <td class="data__table-data">Work</td>
-                <td class="data__table-data">9 June</td>
-                <td class="data__table-data">200$</td>
-            </tr>
-            <tr class="data__table-row data__table-row--expences">
-                <td class="data__table-data">Coffe</td>
-                <td class="data__table-data">Cafe</td>
-                <td class="data__table-data">9 June</td>
-                <td class="data__table-data">2$</td>
-            </tr>
+            
            
-            <tr class="data__table-row data__table-row--income">
-                <td class="data__table-data">UPWORK</td>
-                <td class="data__table-data">Work</td>
-                <td class="data__table-data">9 June</td>
-                <td class="data__table-data">200$</td>
-            </tr>
-            <tr class="data__table-row data__table-row--income">
-                <td class="data__table-data">UPWORK</td>
-                <td class="data__table-data">Work</td>
-                <td class="data__table-data">9 June</td>
-                <td class="data__table-data">200$</td>
-            </tr>
-            <tr class="data__table-row data__table-row--income">
-                <td class="data__table-data">UPWORK</td>
-                <td class="data__table-data">Work</td>
-                <td class="data__table-data">9 June</td>
-                <td class="data__table-data">200$</td>
-            </tr>
-            <tr class="data__table-row data__table-row--income">
-                <td class="data__table-data">UPWORK</td>
-                <td class="data__table-data">Work</td>
-                <td class="data__table-data">9 June</td>
-                <td class="data__table-data">200$</td>
-            </tr>
-            <tr class="data__table-row data__table-row--expences">
-                <td class="data__table-data">Coffe</td>
-                <td class="data__table-data">Cafe</td>
-                <td class="data__table-data">9 June</td>
-                <td class="data__table-data">2$</td>
-            </tr>
-            <tr class="data__table-row data__table-row--income">
-                <td class="data__table-data">UPWORK</td>
-                <td class="data__table-data">Work</td>
-                <td class="data__table-data">9 June</td>
-                <td class="data__table-data">200$</td>
-            </tr>
-            <tr class="data__table-row data__table-row--income">
-                <td class="data__table-data">UPWORK</td>
-                <td class="data__table-data">Work</td>
-                <td class="data__table-data">9 June</td>
-                <td class="data__table-data">200$</td>
-            </tr>
-            <tr class="data__table-row data__table-row--income">
-                <td class="data__table-data">UPWORK</td>
-                <td class="data__table-data">Work</td>
-                <td class="data__table-data">9 June</td>
-                <td class="data__table-data">200$</td>
-            </tr>
-            <tr class="data__table-row data__table-row--income">
-                <td class="data__table-data">UPWORK</td>
-                <td class="data__table-data">Work</td>
-                <td class="data__table-data">9 June</td>
-                <td class="data__table-data">200$</td>
-            </tr>
-            <tr class="data__table-row data__table-row--expences">
-                <td class="data__table-data">Coffe</td>
-                <td class="data__table-data">Cafe</td>
-                <td class="data__table-data">9 June</td>
-                <td class="data__table-data">2$</td>
-            </tr>
         </table>
     </div>
 </section>
@@ -157,3 +58,25 @@
 </body>
 
 </html>
+
+            <!-- <li class="sidebar__prop">
+                <h3 class="sidebar__prop-name">
+                    monobank
+                </h3>
+                <p class="sidebar__prop-amount">
+                    10.000 ₴
+                </p>
+            </li> -->
+
+            <!-- <tr class="data__table-row data__table-row--income">
+                <td class="data__table-data">UPWORK</td>
+                <td class="data__table-data">Work</td>
+                <td class="data__table-data">9 June</td>
+                <td class="data__table-data">200$</td>
+            </tr>
+            <tr class="data__table-row data__table-row--expences">
+                <td class="data__table-data">Coffe</td>
+                <td class="data__table-data">Cafe</td>
+                <td class="data__table-data">9 June</td>
+                <td class="data__table-data">2$</td>
+            </tr> -->

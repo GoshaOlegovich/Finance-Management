@@ -94,31 +94,34 @@ const newTransaction = (v1, v2, v3) => {
 const transactionInject = (arr) => {
     const transactionRow = document.createElement('tr');
     transactionRow.className = 'data__table-row';
-    let transaction =
+
+    if (arr.type === 'income') {
+        transactionRow.className = 'data__table-row data__table-row--income';
+        let transaction =
         `
             <td class="data__table-data">${arr.type} </td>
-            ${inOrOut(arr)}
+            <td class="data__table-data">${arr.amount} ₴</td>
             <td class="data__table-data">${arr.date} </td>
-            `
-    transactionRow.innerHTML = transaction;
-
-    dataTable.appendChild(transactionRow);
-
-
-}
-
-
-
-const inOrOut = (arr) => {
-    if (arr.type === 'income') {
-        
-        return `<td class="data__table-data"> ${arr.amount} ₴</td>`;
-       
-    } if (arr.type === 'outcome')  {
-      
-        return `<td class="data__table-data"> - ${arr.amount} ₴</td>`;
+        `
+        transactionRow.innerHTML = transaction;
+        dataTable.appendChild(transactionRow);
+    } else {
+        transactionRow.className = 'data__table-row data__table-row--outcome';
+        let transaction =
+        `
+            <td class="data__table-data">${arr.type} </td>
+            <td class="data__table-data">-${arr.amount} ₴</td>
+            <td class="data__table-data">${arr.date} </td>
+        `
+        transactionRow.innerHTML = transaction;
+        dataTable.appendChild(transactionRow);
     }
+    
+
+
 }
+
+
 
 
 

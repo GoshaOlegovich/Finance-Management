@@ -2,7 +2,7 @@
 
 const wallets = [{
     prop: 'monobank',
-    amount: 10,
+    amount: 10000,
     currency: '₴'
 }, ]
 
@@ -21,39 +21,20 @@ const dataTable = document.querySelector('.data__table');
 
 
 
+const transactions = []
 
-//Data - Transactions obj 
+//Money Flow
 
-// const transactions = [
-//     // {
-//     //     amount : 1,
-//     //     type: 'income',
-//     // },
-//     // {
+const сountingTransaction = (type) => {
+    let currentType = transactions.filter(transaction => transaction.type === `${type}`);
+    let result = currentType.reduce((total, transaction) => total + transaction.amount, 0);
+    walletToDoc(wallets, 0)
+    return result;
 
-//     //     amount : 1,
-//     //     type: 'consumption',
-//     // },
-//     // {
-//     //     amount : 2,
-//     //     type: 'income',
-//     // },
-//     // {
-//     //     amount : 1,
-//     //     type: 'consumption',
-//     // },
-
-
-// ]
-
-// Create transaction 
-
-class Transaction {
-    constructor() {
-        this.amount = amount
-        this.type = type
-    }
 }
+
+
+
 
 
 // Create transaction (Form)
@@ -62,23 +43,31 @@ const form = document.querySelector('.modal-form__new-transaction'),
     inputType = document.querySelector('.modal-form__type'),
     inputAmount = document.querySelector('.modal-form__amount');
 
-const transactions = []
+
+
+
+
 
 form.addEventListener('submit', (e) => {
     e.preventDefault()
+    const transaction = newTransaction(inputAmount.value, inputType.value);
 
-    const result = newTransaction(inputType.value, inputAmount.value);
-    transactionInject(result)
-    console.log(result);
+    transactions.push(transaction)
+    
+    transactionInject(transaction)
     form.reset();
-
-
+    let currentAmount = wallets[0].amount;
+    wallets[0].amount = currentAmount + (сountingTransaction('income') - сountingTransaction('outcome'));
+    console.log(`income: ${сountingTransaction('income')} outcome ${сountingTransaction('outcome')} Wallet ${wallets[0].amount}`);
+    
 })
 
-const newTransaction = (v1, v2) =>{
+console.log(transactions);
+
+const newTransaction = (v1, v2) => {
     const obj = {
-        amount: v1,
-        type: +v2
+        amount: +v1,
+        type: v2
     }
     return obj;
 }
@@ -87,42 +76,40 @@ const newTransaction = (v1, v2) =>{
 
 
 
-console.log(transactions);
+
 // Transaction inject
 
 const transactionInject = (arr) => {
-        const transactionRow = document.createElement('tr');
-        transactionRow.className = 'data__table-row';
-        let transaction =
+    const transactionRow = document.createElement('tr');
+    transactionRow.className = 'data__table-row';
+    let transaction =
+        `
+            <td class="data__table-data">${arr.type} </td>
+            ${inOrOut(arr)}
             `
-            
-            <td class="data__table-data">${arr.amount}</td>
-            <td class="data__table-data">${arr.type} $</td>
-            
-            `
-        transactionRow.innerHTML = transaction;
+    transactionRow.innerHTML = transaction;
 
-        dataTable.appendChild(transactionRow);
+    dataTable.appendChild(transactionRow);
+
+
+}
+
+
+
+const inOrOut = (arr) => {
+    if (arr.type === 'income') {
+        console.log('i');
+        return `<td class="data__table-data"> ${arr.amount} ₴</td>`;
+       
+    } if (arr.type === 'outcome')  {
+        console.log('o');
+        return `<td class="data__table-data"> - ${arr.amount} ₴</td>`;
+    }
 }
 
 
 
 
-
-//Money Flow
-
-const сountingTransaction = (type) => {
-    let currentType = transactions.filter(transaction => transaction.type === `${type}`);
-    let result = currentType.reduce((total, transaction) => total + transaction.amount, 0);
-
-    return result;
-
-}
-
-const financeFlowsUp = сountingTransaction("income");
-const financeFlowsDown = сountingTransaction("consumption");
-
-wallets[0].amount = wallets[0].amount + financeFlowsUp - financeFlowsDown
 //
 
 

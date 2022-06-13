@@ -10,6 +10,13 @@
 </head>
 
 <body>
+<form class="modal-form__new-transaction">
+    <label for="type">Type</label>
+    <input class='modal-form__type' type="text" id="type">
+    <label for="amount">Amount</label>
+    <input class='modal-form__amount' type="text" id="amount">
+    <input type="submit">
+</form>
 <section class="dashboard">
     <button class="new-active">+</button>
     <div class="sidebar">
@@ -39,9 +46,8 @@
         </div>
         <table class="data__table">
             <tr class="data__table-row">
-                <th class="data__table-title">Reciever</th>
-                <th class="data__table-title">Category</th>
-                <th class="data__table-title">Date</th>
+                <!-- <th class="data__table-title">Index</th> -->
+                <th class="data__table-title">Type</th>
                 <th class="data__table-title">Amount</th>
             </tr>
             

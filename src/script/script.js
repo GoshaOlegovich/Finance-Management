@@ -21,16 +21,24 @@ const dataTable = document.querySelector('.data__table');
 
 
 
-const transactions = []
+
 
 //Money Flow
 
-const сountingTransaction = (type) => {
-    let currentType = transactions.filter(transaction => transaction.type === `${type}`);
-    let result = currentType.reduce((total, transaction) => total + transaction.amount, 0);
-    walletToDoc(wallets, 0)
-    return result;
+const сountingTransaction = (currentAmount, type, arr) => {
 
+    let currentType = arr.filter(transaction => transaction.type === `${type}`);
+    let result = currentType.reduce((total, transaction) => total + transaction.amount, 0);
+
+    if (`${type}` === 'income') {
+        wallets[0].amount = currentAmount + result;
+    } else {
+        wallets[0].amount = currentAmount - result;
+    }
+    
+   
+    
+    walletToDoc(wallets, 0)
 }
 
 
@@ -50,23 +58,24 @@ const form = document.querySelector('.modal-form__new-transaction'),
 
 form.addEventListener('submit', (e) => {
     e.preventDefault()
-    const transaction = newTransaction(inputAmount.value, inputType.value);
-
-    transactions.push(transaction)
+    const transactions = [];
+    let inpType = inputType.value;
+    let inpAmount = +inputAmount.value;
+    let obj = newTransaction(inpAmount, inpType);
+   
+    transactions.push(obj)
     
-    transactionInject(transaction)
+    transactionInject(obj)
+    сountingTransaction(wallets[0].amount, `${inpType}`, transactions)
+    
     form.reset();
-    let currentAmount = wallets[0].amount;
-    wallets[0].amount = currentAmount + (сountingTransaction('income') - сountingTransaction('outcome'));
-    console.log(`income: ${сountingTransaction('income')} outcome ${сountingTransaction('outcome')} Wallet ${wallets[0].amount}`);
-    
 })
 
-console.log(transactions);
+
 
 const newTransaction = (v1, v2) => {
     const obj = {
-        amount: +v1,
+        amount: v1,
         type: v2
     }
     return obj;
@@ -98,11 +107,11 @@ const transactionInject = (arr) => {
 
 const inOrOut = (arr) => {
     if (arr.type === 'income') {
-        console.log('i');
+        
         return `<td class="data__table-data"> ${arr.amount} ₴</td>`;
        
     } if (arr.type === 'outcome')  {
-        console.log('o');
+      
         return `<td class="data__table-data"> - ${arr.amount} ₴</td>`;
     }
 }

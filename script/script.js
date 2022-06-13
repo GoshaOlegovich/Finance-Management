@@ -49,6 +49,7 @@ const сountingTransaction = (currentAmount, type, arr) => {
 
 const form = document.querySelector('.modal-form__new-transaction'),
     inputType = document.querySelector('.modal-form__type'),
+    inputDate = document.querySelector('.modal-form__date'),
     inputAmount = document.querySelector('.modal-form__amount');
 
 
@@ -60,9 +61,10 @@ form.addEventListener('submit', (e) => {
     e.preventDefault()
     const transactions = [];
     let inpType = inputType.value;
+    let inpDate = inputDate.value;
     let inpAmount = +inputAmount.value;
-    let obj = newTransaction(inpAmount, inpType);
-   
+    let obj = newTransaction(inpAmount, inpType, inpDate);
+    
     transactions.push(obj)
     
     transactionInject(obj)
@@ -73,10 +75,11 @@ form.addEventListener('submit', (e) => {
 
 
 
-const newTransaction = (v1, v2) => {
+const newTransaction = (v1, v2, v3) => {
     const obj = {
         amount: v1,
-        type: v2
+        type: v2,
+        date: v3,
     }
     return obj;
 }
@@ -95,6 +98,7 @@ const transactionInject = (arr) => {
         `
             <td class="data__table-data">${arr.type} </td>
             ${inOrOut(arr)}
+            <td class="data__table-data">${arr.date} </td>
             `
     transactionRow.innerHTML = transaction;
 

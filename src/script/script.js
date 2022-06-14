@@ -1,4 +1,16 @@
-// Wallets obj
+/* Main HTML variables */
+
+const dataTable = document.querySelector('.data__table'); // Data - Table
+const walletsPlace = document.querySelector('.sidebar__details'); // Sidebar - Wallets place
+
+const form = document.querySelector('.modal-form__new-transaction'), // Form
+    inputType = document.querySelector('.modal-form__type'),
+    inputDate = document.querySelector('.modal-form__date'),
+    inputAmount = document.querySelector('.modal-form__amount');
+
+/* Main obj */
+
+const transactions = [];
 
 const wallets = [{
     prop: 'monobank',
@@ -6,21 +18,9 @@ const wallets = [{
     currency: '₴'
 }, ]
 
-// Wallets HTML
-
-const walletsPlace = document.querySelector('.sidebar__details');
-const newWallet = document.createElement("li");
-newWallet.className = 'sidebar__prop';
 
 
-/*--- Transactions ---*/
-
-// Data - Table
-
-const dataTable = document.querySelector('.data__table');
-
-
-
+/*--- Functions ---*/
 
 
 //Money Flow
@@ -35,55 +35,32 @@ const сountingTransaction = (currentAmount, type, arr) => {
     } else {
         wallets[0].amount = currentAmount - result;
     }
-    
-   
-    
+
+
     walletToDoc(wallets, 0)
 }
 
 
 
 
-
-// Create transaction (Form)
-
-const form = document.querySelector('.modal-form__new-transaction'),
-    inputType = document.querySelector('.modal-form__type'),
-    inputDate = document.querySelector('.modal-form__date'),
-    inputAmount = document.querySelector('.modal-form__amount');
-
-
-
-
+// Create transaction 
 
 
 form.addEventListener('submit', (e) => {
     e.preventDefault()
-    const transactions = [];
-    let inpType = inputType.value;
-    let inpDate = inputDate.value;
-    let inpAmount = +inputAmount.value;
-    let obj = newTransaction(inpAmount, inpType, inpDate);
-    
+
+    const obj = {
+        amount: +inputAmount.value,
+        type: inputType.value,
+        date: inputDate.value,
+    }
+
     transactions.push(obj)
-    
     transactionInject(obj)
-    сountingTransaction(wallets[0].amount, `${inpType}`, transactions)
-    
+    сountingTransaction(wallets[0].amount, `${inputType.value}`, transactions)
+
     form.reset();
 })
-
-
-
-const newTransaction = (v1, v2, v3) => {
-    const obj = {
-        amount: v1,
-        type: v2,
-        date: v3,
-    }
-    return obj;
-}
-
 
 
 
@@ -97,41 +74,33 @@ const transactionInject = (arr) => {
 
     if (arr.type === 'income') {
         transactionRow.className = 'data__table-row data__table-row--income';
-        let transaction =
-        `
-            <td class="data__table-data">${arr.type} </td>
-            <td class="data__table-data">${arr.amount} ₴</td>
-            <td class="data__table-data">${arr.date} </td>
-        `
-        transactionRow.innerHTML = transaction;
-        dataTable.appendChild(transactionRow);
+
     } else {
         transactionRow.className = 'data__table-row data__table-row--outcome';
-        let transaction =
+    }
+
+
+    let transaction =
         `
             <td class="data__table-data">${arr.type} </td>
-            <td class="data__table-data">-${arr.amount} ₴</td>
+            <td class="data__table-data">${arr.amount}₴</td>
             <td class="data__table-data">${arr.date} </td>
-        `
-        transactionRow.innerHTML = transaction;
-        dataTable.appendChild(transactionRow);
-    }
+        `;
     
+    transactionRow.innerHTML = transaction;
+    dataTable.appendChild(transactionRow);
 
 
 }
 
 
-
-
-
-
-//
-
-
 // Wallet to document
 
+const newWallet = document.createElement("li");
+newWallet.className = 'sidebar__prop';
+
 const walletToDoc = (arr, i) => {
+
     let walletInfo = `
         <h3 class="sidebar__prop-name">${arr[i].prop}</h3>
         <p class="sidebar__prop-amount">${arr[i].amount} ${arr[i].currency}</p>
@@ -139,10 +108,6 @@ const walletToDoc = (arr, i) => {
     newWallet.innerHTML = walletInfo
     walletsPlace.appendChild(newWallet);
 }
-
-
-
-
 
 
 
